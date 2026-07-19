@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import heroImg from "@/assets/hero.jpg";
+import heroImg from "@/assets/hero-girl-scarf.jpg";
+import prodScarf from "@/assets/prod-scarf.jpg";
+import prodHoodie from "@/assets/prod-hoodie.jpg";
+import prodJournal from "@/assets/prod-journal.jpg";
+import prodJewelry from "@/assets/prod-jewelry.jpg";
+import prodStickers from "@/assets/prod-stickers.jpg";
+import prodPet from "@/assets/prod-pet.jpg";
 
 export const Route = createFileRoute("/")({
   component: ComingSoon,
@@ -59,12 +65,42 @@ function ComingSoon() {
   }
 
   const collections = [
-    { name: "Signature Scarves", note: "The red flag print, everywhere" },
-    { name: "Statement Apparel", note: "Hoodies, tees, sweats" },
-    { name: "The Receipts Journal", note: "Your memory. Your proof." },
-    { name: "Red Flag Jewelry", note: "Wear the sign" },
-    { name: "Stickers & Keychains", note: "Small flex, loud message" },
-    { name: "Pet Line", note: "Ramsey approved" },
+    {
+      name: "Signature Scarves",
+      note: "The red flag print, everywhere",
+      image: prodScarf,
+      products: ["The Original Silk Scarf — $68", "Oversized Bar Wrap — $84", "Mini Neck Tie — $38"],
+    },
+    {
+      name: "Statement Apparel",
+      note: "Hoodies, tees, sweats",
+      image: prodHoodie,
+      products: ["Trust Your Instincts Hoodie — $72", "Red Flags Crew Tee — $38", "CEO of Me Sweatshirt — $64"],
+    },
+    {
+      name: "The Receipts Journal",
+      note: "Your memory. Your proof.",
+      image: prodJournal,
+      products: ["The Receipts Hardcover — $32", "Pattern Is Proof Notebook — $22", "Pocket Receipts Set — $18"],
+    },
+    {
+      name: "Red Flag Jewelry",
+      note: "Wear the sign",
+      image: prodJewelry,
+      products: ["Tiny Flag Pendant Necklace — $48", "Red Flag Stud Earrings — $34", "Stacking Signal Ring — $28"],
+    },
+    {
+      name: "Stickers & Keychains",
+      note: "Small flex, loud message",
+      image: prodStickers,
+      products: ["Red Flag Sticker Pack (6) — $12", "Trust Your Gut Keychain — $14", "Vinyl Laptop Decal — $8"],
+    },
+    {
+      name: "Pet Line",
+      note: "Ramsey approved",
+      image: prodPet,
+      products: ["Red Flags Bandana — $22", "Good Boy Energy Tee — $28", "Ride or Die Walk Set — $48"],
+    },
   ];
 
   return (
@@ -160,13 +196,38 @@ function ComingSoon() {
               {collections.map((c, i) => (
                 <div
                   key={c.name}
-                  className="group relative p-6 border border-border rounded-md bg-card hover:border-primary transition-colors overflow-hidden"
+                  className="group relative border border-border rounded-md bg-card hover:border-primary transition-colors overflow-hidden flex flex-col"
                   style={{ animation: `fade-up 0.6s ease-out ${i * 0.08}s both` }}
                 >
-                  <Flag className="absolute -right-2 -top-2 w-16 h-20 text-primary/10 group-hover:text-primary/25 transition-colors" />
-                  <span className="text-xs text-muted-foreground">0{i + 1}</span>
-                  <h3 className="mt-2 font-display text-2xl uppercase">{c.name}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{c.note}</p>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-background">
+                    <img
+                      src={c.image}
+                      alt={c.name}
+                      loading="lazy"
+                      width={800}
+                      height={600}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 px-2 py-1 bg-background/80 backdrop-blur text-[10px] uppercase tracking-widest">
+                      Drop 0{i + 1}
+                    </div>
+                    <Flag className="absolute -right-2 -top-2 w-14 h-16 text-primary/40 drop-shadow-lg" />
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="font-display text-2xl uppercase">{c.name}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{c.note}</p>
+                    <ul className="mt-4 space-y-1.5 text-sm border-t border-border pt-4">
+                      {c.products.map((p) => (
+                        <li key={p} className="flex items-start gap-2">
+                          <Flag className="w-2.5 h-3 mt-1 flex-shrink-0 text-primary" />
+                          <span className="text-muted-foreground">{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <span className="mt-5 inline-block text-[11px] uppercase tracking-[0.3em] text-primary">
+                      Notify me →
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
