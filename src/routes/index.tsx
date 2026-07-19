@@ -22,14 +22,15 @@ function useCountdown() {
   return { d, h, m, s };
 }
 
-function Flag({ className = "" }: { className?: string }) {
+function Flag({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 32" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 24 32" className={className} style={style} fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="2" y="2" width="1.5" height="28" fill="currentColor" />
       <path d="M3.5 3h14l-3 5 3 5h-14V3z" fill="currentColor" />
     </svg>
   );
 }
+
 
 function CountBox({ value, label }: { value: number; label: string }) {
   const str = String(value).padStart(2, "0");
