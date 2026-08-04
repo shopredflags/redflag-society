@@ -74,7 +74,7 @@ jobs:
           deployment-id: ${{ matrix.deployment-id }}
           data: "[${{ steps.deployment.outputs.template-variables }}, ${{ toJson(secrets) }}]"
           input-directory: deployment
-          output-directory: deployment
+          output-directory: .output/public
           intermediate-data-file: deployment/.template-renderer-data
 
       - name: Render real site-url to all files
